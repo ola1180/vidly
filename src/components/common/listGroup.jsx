@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ListGroup = ({
+const ListGroup = ({
   items,
   textProperty,
   valueProperty,
@@ -32,3 +32,5 @@ ListGroup.defaultProps = {
   textProperty: "name",
   valueProperty: "_id",
 };
+
+export default ListGroup;
