@@ -5,6 +5,7 @@ import Rentals from './components/rentals';
 import NotFound from './components/notFound';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import NavBar from './components/navBar';
+import MovieForm from './components/movieForm';
 
 
 
@@ -18,6 +19,7 @@ function App() {
       <main className='container'>
 
         <Routes>
+          <Route path='movies/:id' element={<MovieForm />}></Route>
           <Route path='movies' element={<Movies />}></Route>
           <Route path='customers' element={<Customers />}></Route>
           <Route path='rentals' element={<Rentals />}></Route>
