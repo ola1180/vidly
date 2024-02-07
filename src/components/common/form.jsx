@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Joi from "joi";
 import Input from "./input";
 
 class Form extends Component {
@@ -21,9 +20,8 @@ class Form extends Component {
   };
 
   validateProperty = ({ name, value }) => {
-    const obj = { [name]: value };
-    const schema = { [name]: this.schema[name] };
-    Joi.validate(obj, schema);
+    const schema = { [name]: value };
+    this.schema.validate(schema);
   };
 
   handleSubmit = (e) => {
