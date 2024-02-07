@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Input from "./input";
+import Joi from "joi";
 
 class Form extends Component {
   state = {
@@ -9,25 +10,28 @@ class Form extends Component {
 
   validate = () => {
     const options = { abortEarly: false };
-    const errors = {};
-
     const { error } = this.schema.validate(this.state.data, options);
-
     if (!error) return null;
 
-    error.details.map((item) => (errors[item.path[0]] = item.message));
+    const errors = {};
+    for (let item of error.details) errors[item.path[0]] = item.message;
     return errors;
   };
 
   validateProperty = ({ name, value }) => {
-    const schema = { [name]: value };
-    this.schema.validate(schema);
+    const object = Joi.object({ [name]: Joi.string().required() });
+    const obj = { [name]: value };
+    const { error } = object.validate(obj);
+    return error ? error.details[0].message : null;
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
+
     const errors = this.validate();
-    this.setState({ errors });
+    this.setState({ errors: errors || {} });
+    if (errors) return;
+
     this.doSubmit();
   };
 
@@ -36,8 +40,10 @@ class Form extends Component {
     const errorMessage = this.validateProperty(input);
     if (errorMessage) errors[input.name] = errorMessage;
     else delete errors[input.name];
+
     const data = { ...this.state.data };
     data[input.name] = input.value;
+
     this.setState({ data, errors });
   };
 
@@ -51,6 +57,7 @@ class Form extends Component {
 
   renderInput(name, label, type = "text") {
     const { data, errors } = this.state;
+
     return (
       <Input
         type={type}
