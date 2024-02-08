@@ -19,9 +19,10 @@ class Form extends Component {
   };
 
   validateProperty = ({ name, value }) => {
+    const options = { abortEarly: false };
     const object = Joi.object({ [name]: Joi.string().required() });
     const obj = { [name]: value };
-    const { error } = object.validate(obj);
+    const { error } = object.validate(obj, options);
     return error ? error.details[0].message : null;
   };
 
