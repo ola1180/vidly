@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
-
 import Pagination from "./common/pagination";
 import { paginate } from "../utils/paginate";
 import ListGroup from "./common/listGroup";
 import MoviesTable from "./moviesTable";
 import _ from "lodash";
+import NavigateButton from "./common/navigateButton";
 class Movies extends Component {
   state = {
     movies: [],
@@ -92,6 +92,7 @@ class Movies extends Component {
         </div>
 
         <div className="col">
+          <NavigateButton name="New Movie" path="movies/new" />
           <p>Showing {totalCount} movies in database</p>
 
           <MoviesTable

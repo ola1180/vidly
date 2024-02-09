@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Input from "./input";
 import Joi from "joi";
+import Select from "./select";
 
 class Form extends Component {
   state = {
@@ -22,7 +23,7 @@ class Form extends Component {
     const options = { abortEarly: false };
     const object = Joi.object({ [name]: Joi.string().required() });
     const obj = { [name]: value };
-    const { error } = object.validate(obj, options);
+    const { error } = object.validate(obj, [options]);
     return error ? error.details[0].message : null;
   };
 
@@ -53,6 +54,21 @@ class Form extends Component {
       <button disabled={this.validate()} className="btn btn-primary">
         {label}
       </button>
+    );
+  }
+
+  renderSelect(name, label, options) {
+    const { data, errors } = this.state;
+
+    return (
+      <Select
+        name={name}
+        value={data[name]}
+        label={label}
+        onChange={this.handleChange}
+        error={errors[name]}
+        options={options}
+      />
     );
   }
 
