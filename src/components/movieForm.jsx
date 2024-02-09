@@ -29,7 +29,9 @@ class MovieForm extends Form {
     if (movieId === "new") return;
 
     const movie = getMovie(movieId);
-    if (!movie) return this.props.navigate("/not-found");
+    if (!movie) {
+      return this.props.navigate("/not-found");
+    }
 
     this.setState({ data: this.mapToViewModel(movie) });
   }
@@ -37,7 +39,7 @@ class MovieForm extends Form {
   mapToViewModel(movie) {
     return {
       _id: movie._id,
-      title: movie.genre._id,
+      title: movie.title,
       genreId: movie.genre._id,
       numberInStock: movie.numberInStock,
       dailyRentalRate: movie.dailyRentalRate,
