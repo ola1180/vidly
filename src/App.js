@@ -8,6 +8,8 @@ import NavBar from './components/navBar';
 import MovieForm from './components/movieForm';
 import LoginForm from './components/loginForm';
 import RegisterForm from './components/registerForm';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 
 
@@ -17,9 +19,9 @@ function App() {
 
   return (
     <>
+      <ToastContainer />
       <NavBar />
       <main className='container'>
-
         <Routes>
           <Route path='login' element={<LoginForm />}></Route>
           <Route path='movies/:id' element={<MovieForm />}></Route>
@@ -27,8 +29,8 @@ function App() {
           <Route path='customers' element={<Customers />}></Route>
           <Route path='rentals' element={<Rentals />}></Route>
           <Route path='register' element={<RegisterForm />}></Route>
-          <Route path='new' element={<MovieForm />}></Route>
           <Route path='not-found' element={<NotFound />}></Route>
+          <Route path='new' element={<MovieForm />}></Route>
           <Route path='/' element={<Navigate to='movies' replace />}></Route>
           <Route path='*' element={<Navigate to='not-found' />} />
         </Routes>
