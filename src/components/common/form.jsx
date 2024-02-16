@@ -12,6 +12,7 @@ class Form extends Component {
   validate = () => {
     const options = { abortEarly: false };
     const { error } = this.schema.validate(this.state.data, options);
+    console.log(error);
     if (!error) return null;
 
     const errors = {};
@@ -29,10 +30,8 @@ class Form extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log("handle");
 
     const errors = this.validate();
-    console.log(errors);
     this.setState({ errors: errors || {} });
     if (errors) return;
 

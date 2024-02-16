@@ -54,7 +54,6 @@ class MovieForm extends Form {
   }
 
   doSubmit = async () => {
-    console.log("submitted");
     await saveMovie(this.state.data);
     this.props.navigate("/movies");
   };
